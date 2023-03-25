@@ -1,4 +1,6 @@
 const blogService = require("../services/BlogService");
+
+
  
 exports.getAllBlogs = async (req, res) => {
   try {
@@ -7,6 +9,7 @@ exports.getAllBlogs = async (req, res) => {
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
+  
 };
  
 exports.createBlog = async (req, res) => {
