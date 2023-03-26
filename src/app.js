@@ -5,6 +5,9 @@ require('dotenv').config();
 
 const blogRouter = require("./routes/BlogRoutes");
 const userRouter = require("./routes/UserRoutes");
+const authRouter = require("./routes/AuthRoutes");
+const dashboadRoutes = require('./routes/dashboard');
+const verifyToken = require('./routes/validate-token');
 
 
 // mongo db connection 
@@ -17,6 +20,9 @@ app.use(express.json());
 
 app.use("/api/blogs", blogRouter);
 app.use("/api/users", userRouter);
+app.use("/api", authRouter);
+
+app.use('/api/dashboard', verifyToken, dashboadRoutes);
 
  
 app.listen(3001, () => {
