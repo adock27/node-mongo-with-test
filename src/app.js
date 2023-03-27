@@ -8,6 +8,8 @@ const userRouter = require("./routes/UserRoutes");
 const authRouter = require("./routes/AuthRoutes");
 const dashboadRoutes = require('./routes/dashboard');
 const verifyToken = require('./routes/validate-token');
+const { jwtMiddleware } = require("./middlewares/jwtMiddleware");
+
 
 
 // mongo db connection 
@@ -22,11 +24,16 @@ app.use("/api/blogs", blogRouter);
 app.use("/api/users", userRouter);
 app.use("/api", authRouter);
 
-app.use('/api/dashboard', verifyToken, dashboadRoutes);
+// Agregar middleware para rutas protegidas
+app.use('/protected', jwtMiddleware);
+// Agregar ruta protegida
+app.get('/protected/example', (req, res) => {
+  res.json({ message: 'Esta es una ruta protegida' });
+});
 
- 
+
 app.listen(3001, () => {
   console.log("Server is running on port 3001");
 });
- 
+
 module.exports = app;

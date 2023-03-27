@@ -1,32 +1,21 @@
 const router = require('express').Router();
+const auth = require("../auth/auth");
 const User = require('../models/User');
-const jwt = require('jsonwebtoken');
-
-// constraseña
 const bcrypt = require('bcrypt');
 
-// validation
-const Joi = require('@hapi/joi');
+router.post("/login", async (req, res) => {
+  const { name, password } = req.body;
 
-const schemaRegister = Joi.object({
-  name: Joi.string().min(6).max(255).required(),
-  email: Joi.string().min(6).max(255).required().email(),
-  password: Joi.string().min(6).max(1024).required()
-})
-
-const schemaLogin = Joi.object({
-  email: Joi.string().min(6).max(255).required().email(),
-  password: Joi.string().min(6).max(1024).required()
-})
+  try {
+    const { user, token } = await auth.authenticateUser(name, password);
+    res.json({ data: { user, token }, status: "success" });
+  } catch (err) {
+    res.status(401).json({ error: err.message });
+  }
+});
 
 router.post('/register', async (req, res) => {
 
-  // validate user
-  const { error } = schemaRegister.validate(req.body)
-
-  if (error) {
-    return res.status(400).json({ error: error.details[0].message })
-  }
 
   const isEmailExist = await User.findOne({ email: req.body.email });
   if (isEmailExist) {
@@ -42,6 +31,7 @@ router.post('/register', async (req, res) => {
     email: req.body.email,
     password: password
   });
+  
   try {
     const savedUser = await user.save();
     res.json({
@@ -51,36 +41,6 @@ router.post('/register', async (req, res) => {
   } catch (error) {
     res.status(400).json({ error })
   }
-})
-
-
-
-router.post('/login', async (req, res) => {
-  // validaciones
-  const { error } = schemaLogin.validate(req.body);
-  if (error) return res.status(400).json({ error: error.details[0].message })
-
-  const user = await User.findOne({ email: req.body.email });
-  if (!user) return res.status(400).json({ error: 'Usuario no encontrado' });
-
-  const validPassword = await bcrypt.compare(req.body.password, user.password);
-  if (!validPassword) return res.status(400).json({ error: 'contraseña no válida' })
-
-  // create token
-  const token = jwt.sign({
-    name: user.name,
-    id: user._id
-  }, process.env.TOKEN_SECRET)
-
-  res.header('auth-token', token).json({
-    error: null,
-    data: { token }
-  })
-
-  // res.json({
-  //   error: null,
-  //   data: 'exito bienvenido'
-  // })
 })
 
 module.exports = router;
