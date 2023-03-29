@@ -6,8 +6,6 @@ require('dotenv').config();
 const blogRouter = require("./routes/BlogRoutes");
 const userRouter = require("./routes/UserRoutes");
 const authRouter = require("./routes/AuthRoutes");
-const dashboadRoutes = require('./routes/dashboard');
-const verifyToken = require('./routes/validate-token');
 const { jwtMiddleware } = require("./middlewares/jwtMiddleware");
 
 

@@ -1,49 +1,14 @@
 const blogService = require("../services/BlogService");
+const handlePromise = require("../utils/handlePromise");
 
 
- 
-exports.getAllBlogs = async (req, res) => {
-  try {
-    const blogs = await blogService.getAllBlogs();
-    res.json({ data: blogs, status: "success" });
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-  
-};
- 
-exports.createBlog = async (req, res) => {
-  try {
-    const blog = await blogService.createBlog(req.body);
-    res.json({ data: blog, status: "success" });
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-};
- 
-exports.getBlogById = async (req, res) => {
-  try {
-    const blog = await blogService.getBlogById(req.params.id);
-    res.json({ data: blog, status: "success" });
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-};
- 
-exports.updateBlog = async (req, res) => {
-  try {
-    const blog = await blogService.updateBlog(req.params.id, req.body);
-    res.json({ data: blog, status: "success" });
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-};
- 
-exports.deleteBlog = async (req, res) => {
-  try {
-    const blog = await blogService.deleteBlog(req.params.id);
-    res.json({ data: blog, status: "success" });
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-};
+exports.getAllBlogs = (req, res) => handlePromise(blogService.getAllBlogs(), res);
+
+exports.createBlog = (req, res) => handlePromise(blogService.createBlog(req.body), res);
+
+exports.getBlogById = (req, res) => handlePromise(blogService.getBlogById(req.params.id));
+
+exports.updateBlog = (req, res) => handlePromise(blogService.updateBlog(req.params.id, req.body), res);
+
+exports.deleteBlog = (req, res) => handlePromise(blogService.deleteBlog(req.params.id), res);
+
