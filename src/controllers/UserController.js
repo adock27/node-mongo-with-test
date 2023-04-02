@@ -1,5 +1,5 @@
 const userService = require("../services/UserService");
-
+const handlePromise = require("../utils/handlePromise");
 
 exports.getAllUsers = (req, res) => handlePromise(userService.getAllUsers(), res);
 
