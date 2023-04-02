@@ -4,6 +4,8 @@ const handlePromise = require("../utils/handlePromise");
 
 exports.getAllBlogs = (req, res) => handlePromise(blogService.getAllBlogs(), res);
 
+exports.getAllBlogsWithAuthor = (req, res) => handlePromise(blogService.getBlogsWithAuthor(), res);
+
 exports.createBlog = (req, res) => handlePromise(blogService.createBlog(req.body), res);
 
 exports.getBlogById = (req, res) => handlePromise(blogService.getBlogById(req.params.id),res);

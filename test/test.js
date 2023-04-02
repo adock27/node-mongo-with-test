@@ -37,7 +37,7 @@ describe('POST /api/blogs', () => {
             title: 'OK',
             body: 'OK',
             image: 'OK',
-            author: '6423cf6316cba3673b50060c'
+            author: '641fa38bef4c8f9e3fac3461'
         };
         request(app)
             .post('/api/blogs')
@@ -62,7 +62,7 @@ describe("GET /:id", () => {
             title: 'OK',
             body: 'OK',
             image: 'OK',
-            author: '6423cf6316cba3673b50060c'
+            author: '641fa38bef4c8f9e3fac3461'
         });
         await blog.save();
 
