@@ -11,8 +11,18 @@ const blogSchema = new Schema(
       default: Date.now,
     },
     author: {
-      type: mongoose.Types.ObjectId // saving the reference from user collection
-    }
+      type: mongoose.Types.ObjectId, // saving the reference from user collection
+      ref: 'User',
+      required: true
+    },
+    tags: [String],
+    comments: [
+      {
+        content: { type: String, required: true },
+        author: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+        creation_date: { type: Date, default: Date.now }
+      }
+    ]
 
   }, {
   versionKey: false

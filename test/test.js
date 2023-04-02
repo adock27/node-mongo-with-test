@@ -86,7 +86,8 @@ describe("PUT /:id", () => {
         const blog = new Blog({
             title: 'Blog de prueba',
             body: 'Contenido de prueba',
-            image: 'Contenido de prueba'
+            image: 'Contenido de prueba',
+            author: '641fa38bef4c8f9e3fac3461'
         });
         await blog.save();
 
@@ -114,7 +115,8 @@ describe("DELETE /:id", () => {
         const blog = new Blog({
             title: 'Blog de prueba eliminar',
             body: 'Contenido de prueba',
-            image: 'Contenido de prueba'
+            image: 'Contenido de prueba',
+            author: '641fa38bef4c8f9e3fac3461'
         });
         await blog.save();
 

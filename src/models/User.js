@@ -22,6 +22,15 @@ const userSchema = new Schema({
   date: {
     type: Date,
     default: Date.now
+  },
+  profile: {
+    bio: String,
+    profile_image: String,
+    social_media: {
+      twitter: String,
+      facebook: String,
+      instagram: String
+    }
   }
 });
 
