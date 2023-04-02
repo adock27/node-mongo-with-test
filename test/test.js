@@ -36,7 +36,8 @@ describe('POST /api/blogs', () => {
         const newBlog = {
             title: 'OK',
             body: 'OK',
-            image: 'OK'
+            image: 'OK',
+            author: '6423cf6316cba3673b50060c'
         };
         request(app)
             .post('/api/blogs')
@@ -58,15 +59,16 @@ describe("GET /:id", () => {
     it('should get a blog by id', async () => {
         // Crear un blog
         const blog = new Blog({
-            title: 'Blog de prueba',
-            body: 'Contenido de prueba',
-            image: 'Contenido de prueba'
+            title: 'OK',
+            body: 'OK',
+            image: 'OK',
+            author: '6423cf6316cba3673b50060c'
         });
         await blog.save();
 
         // Hacer una solicitud GET para obtener el blog por su ID
         const res = await request(app)
-            .get(`/api/blogs/${blog.id}`);
+            .get(`/api/blogs/${blog._id}`);
 
         expect(res.statusCode).to.equal(200);
         expect(res.body).to.be.an('object');

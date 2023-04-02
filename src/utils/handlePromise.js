@@ -1,7 +1,6 @@
 module.exports = (promise, res) => {
     promise
         .then(result => {
-            // console.log(result)
             res.json({ data: result, status: "success" });
         })
         .catch(error => {

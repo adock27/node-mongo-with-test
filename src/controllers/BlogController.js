@@ -6,7 +6,7 @@ exports.getAllBlogs = (req, res) => handlePromise(blogService.getAllBlogs(), res
 
 exports.createBlog = (req, res) => handlePromise(blogService.createBlog(req.body), res);
 
-exports.getBlogById = (req, res) => handlePromise(blogService.getBlogById(req.params.id));
+exports.getBlogById = (req, res) => handlePromise(blogService.getBlogById(req.params.id),res);
 
 exports.updateBlog = (req, res) => handlePromise(blogService.updateBlog(req.params.id, req.body), res);
 
