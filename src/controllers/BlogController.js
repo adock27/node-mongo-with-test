@@ -10,6 +10,8 @@ exports.createBlog = (req, res) => handlePromise(blogService.createBlog(req.body
 
 exports.getBlogById = (req, res) => handlePromise(blogService.getBlogById(req.params.id),res);
 
+exports.getBlogsFromUserId = (req, res) => handlePromise(blogService.getBlogsFromUserId(req.params.id),res);
+
 exports.updateBlog = (req, res) => handlePromise(blogService.updateBlog(req.params.id, req.body), res);
 
 exports.deleteBlog = (req, res) => handlePromise(blogService.deleteBlog(req.params.id), res);

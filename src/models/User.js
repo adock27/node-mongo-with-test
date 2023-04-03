@@ -32,6 +32,8 @@ const userSchema = new Schema({
       instagram: String
     }
   }
+}, {
+  versionKey: false
 });
 
 module.exports = mongoose.model("User", userSchema);

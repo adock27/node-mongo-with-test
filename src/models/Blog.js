@@ -12,7 +12,7 @@ const blogSchema = new Schema(
     },
     author: {
       type: mongoose.Types.ObjectId, // saving the reference from user collection
-      ref: 'User',
+      // ref: 'User',
       required: true
     },
     tags: [String],
