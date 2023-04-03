@@ -34,6 +34,14 @@ exports.getBlogsWithAuthor = async () => {
     },
     {
       $unwind: '$author'
+    },
+    {
+      $project: { // limitar los campos recibidos
+        // 'author.name': 1,
+        // 'author.email': 1
+        'author.password': 0,
+        'author.date': 0
+      }
     }
   ]);
 };
