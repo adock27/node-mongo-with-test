@@ -36,4 +36,17 @@ const userSchema = new Schema({
   versionKey: false
 });
 
+
+userSchema.pre('remove', async function(next) {
+  const user = this;
+  try {
+    await Blog.updateMany({ author: user._id }, { $unset: { author: "" } });
+    next();
+  } catch (err) {
+    next(err);
+  }
+});
+
+
 module.exports = mongoose.model("User", userSchema);
+
