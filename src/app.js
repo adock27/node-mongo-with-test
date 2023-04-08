@@ -3,6 +3,7 @@ const app = express();
 const cors = require('cors')
 const _connect = require('./db/_connect');
 require('dotenv').config();
+const path = require('path')
 
 const blogRouter = require("./routes/BlogRoutes");
 const userRouter = require("./routes/UserRoutes");
@@ -19,6 +20,8 @@ _connect();
 //middleware
 app.use(express.json());
 app.use(cors())
+// función middleware para servir archivos estáticos
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.use("/api/blogs", blogRouter);
 app.use("/api/users", userRouter);
@@ -35,9 +38,9 @@ app.get('/protected/example', (req, res) => {
 
 
 
-// Handle all not found routes
+//Handle all not found routes
 app.use((req, res , next) =>{
-  res.status(404).send('<h3>Page not found</h3>')
+  res.status(404).send({error : 'This route does not exist'})
 });
 
 app.listen(3001, () => {
