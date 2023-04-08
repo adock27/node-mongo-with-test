@@ -1,11 +1,13 @@
 const express = require("express");
 const app = express();
+const cors = require('cors')
 const _connect = require('./db/_connect');
 require('dotenv').config();
 
 const blogRouter = require("./routes/BlogRoutes");
 const userRouter = require("./routes/UserRoutes");
 const authRouter = require("./routes/AuthRoutes");
+const FileRouter = require("./routes/FileRoutes");
 const { jwtMiddleware } = require("./middlewares/jwtMiddleware");
 
 
@@ -16,10 +18,11 @@ _connect();
 
 //middleware
 app.use(express.json());
-
+app.use(cors())
 
 app.use("/api/blogs", blogRouter);
 app.use("/api/users", userRouter);
+app.use("/api/files", FileRouter);
 app.use("/api", authRouter);
 
 // Agregar middleware para rutas protegidas

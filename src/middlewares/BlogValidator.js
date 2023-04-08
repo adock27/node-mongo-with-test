@@ -8,9 +8,15 @@ const schema = {
         title: { type: "string" },
         body: { type: "string" },
         image: { type: "string" },
-        author: { type: "string" }
+        author: { type: "string" },
+        tags: {
+            type: "array",
+            items: [
+                { type: "string" }
+            ]
+        }
     },
-    required: ['title','body','image', 'author'],
+    required: ['title', 'body', 'image'],
     additionalProperties: false
 }
 
