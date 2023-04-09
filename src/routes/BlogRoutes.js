@@ -15,7 +15,7 @@ const router = express.Router();
 
 
 
-router.route("/").get(getAllBlogs).post(validateBlog,createBlog);
+router.route("/").get(getAllBlogs).post(createBlog);
 router.route("/author").get(getAllBlogsWithAuthor);
 router.route("/:id").get(getBlogById).put(updateBlog).delete(deleteBlog);
 
