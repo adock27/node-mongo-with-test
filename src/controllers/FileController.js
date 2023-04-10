@@ -39,8 +39,8 @@ exports.upload = upload.single('file');
 // Exportamos una función "uploadFile" que se utilizará para manejar la carga de archivos y para realizar cualquier otra acción necesaria en la ruta de carga.
 exports.uploadFile = (req, res) => {
     // console.log(req.file);
-    res.json({
-        path: `http://localhost:3001/uploads/${req.file.filename}`,
+    res.send({
+        path: `${process.env.BASEURL}/uploads/${req.file.filename}`,
         filepath: req.file.path
     })
 }
